@@ -29,7 +29,7 @@ def scrapeDelicardApi(cardNr: str, password: str, days: int = 90, forceReload = 
             response.raise_for_status()
             print(f"{response}")
         except HTTPError as e:
-            print(f"Error: Request to {e.response.url} failed. Status code: {e.response.status_code}. Check your username and password. Server might also be in maintanace.")
+            print(f"Error: Request to {e.response.url} failed. Status code: {e.response.status_code}. Check your username and password. Server might also be in maintenance.")
     
     s = requests_cache.CachedSession(cache_name="delicard_api_cache", ignored_parameters=['_', 'authToken'], allowable_codes=(200,201), allowable_methods=('GET', 'POST'), expire_after=24*3600)
     
