@@ -6,7 +6,7 @@ import requests_cache
 from requests.exceptions import HTTPError
 import pandas as pd
 import glob
-
+import argparse
 
 def scrapeDelicardApi(cardNr: str, password: str, days: int = 90, forceReload=False) -> None:
     """
@@ -279,9 +279,11 @@ def getDataframe(
     merged_df.to_csv(f"{cardNr}/fullData.csv", mode="w+", encoding="utf-8")
     return merged_df
 
-
 if __name__ == "__main__":
-    cardNr = input("CardNr:")
-    password = input("Password:")
-    print("Downloading all available data from API and saving it to files...")
+    parser = argparse.ArgumentParser(description="DeliCard Service Data Scraper")
+    parser.add_argument("--cardNr", required=True, type=int, help="DeliCard number (printed on the card)")
+    parser.add_argument("--password", required=True, type=str, help="Password (printed on the receipt)")
+    args = parser.parse_args()
+    cardNr = str(args.cardNr)
+    password = args.password
     scrapeDelicardApi(cardNr, password)

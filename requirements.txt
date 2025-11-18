@@ -3,3 +3,4 @@ pandas
 requests
 requests_cache
 matplotlib
+seaborn
